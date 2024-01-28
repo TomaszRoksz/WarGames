@@ -15,7 +15,7 @@ public class MoneyTransfer extends Move{
     @Override
     void execute(General general){
        general.addMoney(moneyAmount);
-       currentGeneral.substractMoney(moneyAmount);
+       currentGeneral.subtractMoney(moneyAmount);
     }
 
 }

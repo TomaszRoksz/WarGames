@@ -1,25 +1,29 @@
 import java.util.ArrayList;
-import java.util.Random;
 
 public class General{
     ArrayList<Soldier> army= new ArrayList<>();
     public double money;
+    public String name;
 
-    public General(double money) {
+    General(String name, double money) {
+        this.name = name;
         this.money = money;
+    }
+
+    String getName(){
+        return name;
     }
 
     void addMoney(double income){
         money+=income;
     }
 
-
-    double getMoney(){
-        return money;
+    void subtractMoney(double outcome){
+        money-=outcome;
     }
 
-     void substractMoney(double outcome){
-        money-=outcome;
+    public double getMoney(){
+        return money;
     }
 
     public Integer getArmyPower(){
@@ -28,12 +32,4 @@ public class General{
         for(Soldier soldier:this.army) armyPower += soldier.getPower();
         return armyPower;
     }
-//
-//    @Override
-//    public void update(String string) {
-//        WriteToFile write= new WriteToFile();
-//        write.writeToFile("Current general money: "+money+", current army power: "+
-//                getArmyPower()+", current army size: "+army.size()+".");
-//
-//    }
 }

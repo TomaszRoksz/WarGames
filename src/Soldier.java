@@ -1,30 +1,48 @@
 public class Soldier{
 
+    public enum valueGrade{
+        gradeOne(1, "Szeregowy"),
+        gradeTwo(2, "Kapral"),
+        gradeThree(3, "Kapitan"),
+        gradeFour(4, "Major");
+
+        private final int rank;
+        private final String grade;
+
+        valueGrade(int rank, String grade) {
+            this.rank = rank;
+            this.grade = grade;
+        }
+        public int getRank() {
+            return rank;}
+
+        public String getGrade(){
+            return grade;}
+    }
     Integer experience;
     Integer value;
     Integer power;
 
-    public Soldier(Integer experience, Integer value) {
-        this.experience = experience;
+    public Soldier(Integer value) {
+        this.experience = 1;
         this.value = value;
         this.power = value * experience;
+
     }
 
-    public Integer getExperience() {
+        public String getGrade() {
+            String actualGrade="Unknow";
+            for (valueGrade rank : valueGrade.values()) {
+                if (rank.getRank() == value) {
+                    actualGrade=rank.getGrade();
+                }
+            }
+            return actualGrade;
+        }
+
+        public Integer getExperience() {
         return experience;
     }
-
-//    public String getGrade() {
-//
-//        String grade;
-//
-//        if(value==1){ String grade="Szeregowy";}
-//        else if (value==2){ String grade="Kapral";}
-//        else if (value==3){ String grade="Kapitan";}
-//        else{{ String grade="Major";}}
-//
-//        return grade;
-//    }
 
     public Integer getValue() {
         return value;
@@ -46,13 +64,13 @@ public class Soldier{
     public void experienceLoss() {
         experience -= 1;
     }
-//
+
 //    @Override
 //    public void update(String string) {
 //        WriteToFile write = new WriteToFile();
 //        write.writeToFile("Current exp: " + experience + ", current value: " + value + ".");
     }
-}
+
 
 
 

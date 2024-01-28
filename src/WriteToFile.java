@@ -1,11 +1,18 @@
-import java.io.FileWriter;   // Import the FileWriter class
-import java.io.IOException;  // Import the IOException class to handle errors
+import java.io.FileWriter;
+import java.io.IOException;
 
 public class WriteToFile {
 
-    public  void writeToFile(String report) {
+    String fileName;
+
+    WriteToFile(String fileName){
+        this.fileName=fileName;
+    }
+
+    public void writeToFile(String report) {
+
         try {
-            FileWriter myWriter = new FileWriter("War_report.txt");
+            FileWriter myWriter = new FileWriter(fileName);
             myWriter.write(report);
             myWriter.close();
         } catch (IOException e) {

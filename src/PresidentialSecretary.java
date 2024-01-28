@@ -1,22 +1,31 @@
-import java.util.HashMap;
-import java.util.Map;
+public class PresidentialSecretary implements Observer {
 
-class PresidentialSecretary{
-    private General general;
-    private HashMap <Move, Observer> observers;
+    WriteToFile file;
 
-    public void observe (Move move, Observer observer){
-        observers.put(move, observer);
+    PresidentialSecretary(String file){
+        this.file=new WriteToFile(file);
     }
 
-    public void unObserve (Move move, Observer observer){
-        observers.remove(move, observer);
+    @Override
+    public void update(Object o) {
+
     }
 
-    public void notify(Move move, Observer observer){
-        observers.forEach((key, value) -> {
-            value.update(general);
-        });
+    public void update(General general, General attackedGeneral, String result) {
 
-        }
+        file.writeToFile("General "+ general.getName()+" attacked general "+ attackedGeneral+" and "+result);
     }
+
+    public void update(General general, Integer numberOfSoldiers, Integer soldiersValue) {
+
+        file.writeToFile("General "+general.getName()+" recruited "+numberOfSoldiers+" soldiers for "+soldiersValue+" golden coins each.");
+    }
+
+    public void update(General general, Double percentage) {
+
+        file.writeToFile("General "+general.getName()+" sent "+percentage+" of his soldiers for maneuvers.");
+    }
+
+
+
+}

@@ -1,12 +1,14 @@
 import java.util.Random;
 
-class Attack extends Move {
+class AttackHandler extends Move {
 
     public General attackedGeneral;
+    private final PresidentialSecretary presidentialSecretary;
 
-//    Attack(General attackedGeneral) {
-//        this.attackedGeneral = attackedGeneral;
-//    }
+    AttackHandler(General attackedGeneral, PresidentialSecretary presidentialSecretary) {
+        this.attackedGeneral = attackedGeneral;
+        this.presidentialSecretary = presidentialSecretary;
+    }
 
     @Override
     boolean canExecute(General general){
@@ -18,12 +20,15 @@ class Attack extends Move {
             Integer armyPower1 = general.getArmyPower();
             Integer armyPower2 = attackedGeneral.getArmyPower();
             if (armyPower1 > armyPower2) {
+                presidentialSecretary.update(general, attackedGeneral, "won");
                 battleWin(general);
                 battleLoss(attackedGeneral);
             } else if (armyPower1 < armyPower2) {
+                presidentialSecretary.update(general, attackedGeneral, "lost");
                 battleWin(attackedGeneral);
                 battleLoss(general);
             } else {
+                presidentialSecretary.update(general, attackedGeneral, "it was a draw");
                 battleDraw(general);
                 battleDraw(attackedGeneral);
             }
