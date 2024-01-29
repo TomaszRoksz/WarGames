@@ -2,7 +2,7 @@ public class RecruitmentCenter extends Move{
 
     private Integer numberOfSoldiers;
     private Integer soldiersValue;
-    private PresidentialSecretary presidentialSecretary;
+    private final PresidentialSecretary presidentialSecretary;
 
     public RecruitmentCenter(PresidentialSecretary presidentialSecretary) {
         this.presidentialSecretary= presidentialSecretary;
@@ -23,6 +23,8 @@ public class RecruitmentCenter extends Move{
         for(int i=0; i<10; i++){
             Soldier soldier = new Soldier(1);
             general.army.add(soldier);
+            presidentialSecretary.update(general, soldier, "recruited new soldier.");
+
         }
     }
 
@@ -33,6 +35,7 @@ public class RecruitmentCenter extends Move{
         for (int i = 0; i < numberOfSoldiers; i++) {
             Soldier soldier = new Soldier(soldiersValue);
             general.army.add(soldier);
+            presidentialSecretary.update(general, soldier, "recruited new soldier.");
         }
     }
 }

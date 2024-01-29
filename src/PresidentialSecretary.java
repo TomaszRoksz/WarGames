@@ -26,6 +26,10 @@ public class PresidentialSecretary implements Observer {
         file.writeToFile("General "+general.getName()+" sent "+percentage+" of his soldiers for maneuvers.");
     }
 
+    public void update(General general, Soldier soldier, String action) {
+
+        file.writeToFile("Soldier "+soldier+" from general "+general+" army "+action);
+    }
 
 
 }

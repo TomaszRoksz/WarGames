@@ -21,23 +21,27 @@ public class ManeuversCenter extends Move{
     void execute(General general){
 
         Random generator = new Random();
-
+        presidentialSecretary.update(general, 0.1);
 
         for (int i=0; i<general.army.size()*0.1;i++){
-            int randomNumber=generator.nextInt(general.army.size());
-            general.army.get(randomNumber).experienceGain();
-            general.subtractMoney(general.army.get(randomNumber).getValue());
+            Soldier randomSoldier=general.army.get(generator.nextInt(general.army.size()));
+            randomSoldier.experienceGain();
+            general.subtractMoney(randomSoldier.getValue());
+            presidentialSecretary.update(general, randomSoldier, "gained experience.");
         }
     }
 
     void execute(General general, Double percentage) {
 
         Random generator = new Random();
+        presidentialSecretary.update(general, percentage);
 
-        for (int i = 0; i < general.army.size() * 0.1; i++) {
-            int randomNumber = generator.nextInt(general.army.size());
-            general.army.get(randomNumber).experienceGain();
-            general.subtractMoney(general.army.get(randomNumber).getValue());
+
+        for (int i = 0; i < general.army.size() * percentage; i++) {
+            Soldier randomSoldier=general.army.get(generator.nextInt(general.army.size()));
+            randomSoldier.experienceGain();
+            general.subtractMoney(randomSoldier.getValue());
+            presidentialSecretary.update(general, randomSoldier, "gained experience.");
         }
     }
 }

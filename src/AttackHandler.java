@@ -36,24 +36,30 @@ class AttackHandler extends Move {
     }
 
     void battleLoss(General general) {
-
         Random generator = new Random();
 
         for (int i = 0; i < (general.army.size() / 10); i++) {
-            general.army.remove(generator.nextInt(general.army.size()));
+            Soldier tempSoldier=general.army.get(generator.nextInt(general.army.size()));
+            presidentialSecretary.update(general, tempSoldier, "died.");
+            general.army.remove(tempSoldier);
         }
 
         for (Soldier soldier : general.army) {
             soldier.experienceLoss();
             if (soldier.getExperience() == 0) {
                 general.army.remove(soldier);
+                presidentialSecretary.update(general, soldier, "died.");}
+            else {
+                presidentialSecretary.update(general, soldier, "lost experience.");
             }
+
         }
     }
 
     void battleWin(General general){
 
         for(Soldier soldier:general.army) {
+            presidentialSecretary.update(general, soldier, "gain experience.");
             soldier.experienceGain();
         }
 
@@ -63,6 +69,8 @@ class AttackHandler extends Move {
         Random generator = new Random();
 
         for(int i = 0; i <= 1; i++) {
-            general.army.remove(generator.nextInt(general.army.size()));    }
+            Soldier tempSoldier=general.army.get(generator.nextInt(general.army.size()));
+            presidentialSecretary.update(general, tempSoldier, "died.");
+            general.soldierBurial(tempSoldier);    }
     }
 }

@@ -27,7 +27,6 @@ public class Soldier{
         this.experience = 1;
         this.value = value;
         this.power = value * experience;
-
     }
 
         public String getGrade() {
