@@ -32,8 +32,9 @@ public class General{
         for(Soldier soldier:this.army) armyPower += soldier.getPower();
         return armyPower;
     }
+    void soldierAdd(Soldier soldier) { army.add(soldier); }
 
-    public void soldierBurial(Soldier soldier){
+    void soldierBurial(Soldier soldier){
         army.remove(soldier);
     }
 }

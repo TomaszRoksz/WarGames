@@ -21,15 +21,13 @@ public class Soldier{
     }
     Integer experience;
     Integer value;
-    Integer power;
 
     public Soldier(Integer value) {
         this.experience = 1;
         this.value = value;
-        this.power = value * experience;
     }
 
-        public String getGrade() {
+    public String getGrade() {
             String actualGrade="Unknow";
             for (valueGrade rank : valueGrade.values()) {
                 if (rank.getRank() == value) {
@@ -37,9 +35,9 @@ public class Soldier{
                 }
             }
             return actualGrade;
-        }
+    }
 
-        public Integer getExperience() {
+    public Integer getExperience() {
         return experience;
     }
 
@@ -48,7 +46,7 @@ public class Soldier{
     }
 
     public Integer getPower() {
-        return power;
+        return value*experience;
     }
 
     public void experienceGain() {
@@ -61,18 +59,7 @@ public class Soldier{
     }
 
     public void experienceLoss() {
-        experience -= 1;
+        experience -=1;
     }
 
-//    @Override
-//    public void update(String string) {
-//        WriteToFile write = new WriteToFile();
-//        write.writeToFile("Current exp: " + experience + ", current value: " + value + ".");
-    }
-
-
-
-
-
-
-
+}

@@ -1,7 +1,4 @@
 public class RecruitmentCenter extends Move{
-
-    private Integer numberOfSoldiers;
-    private Integer soldiersValue;
     private final PresidentialSecretary presidentialSecretary;
 
     public RecruitmentCenter(PresidentialSecretary presidentialSecretary) {

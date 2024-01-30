@@ -2,28 +2,36 @@ import java.util.Random;
 
 class AttackHandler extends Move {
 
-    public General attackedGeneral;
+    public General general;
     private final PresidentialSecretary presidentialSecretary;
 
-    AttackHandler(General attackedGeneral, PresidentialSecretary presidentialSecretary) {
-        this.attackedGeneral = attackedGeneral;
+    AttackHandler(General general, PresidentialSecretary presidentialSecretary) {
+        this.general = general;
         this.presidentialSecretary = presidentialSecretary;
     }
 
     @Override
-    boolean canExecute(General general){
+    boolean canExecute(General attackedGeneral){
         return general.getArmyPower()>0 && general.getMoney()>0;
     }
     @Override
-    void execute(General general){
+    void execute(General attackedGeneral){
         if(canExecute(general)) {
             Integer armyPower1 = general.getArmyPower();
             Integer armyPower2 = attackedGeneral.getArmyPower();
             if (armyPower1 > armyPower2) {
+
+                MoneyTransfer moneyTransfer = new MoneyTransfer(0.1, attackedGeneral);
+                moneyTransfer.execute(general);
+
                 presidentialSecretary.update(general, attackedGeneral, "won");
                 battleWin(general);
                 battleLoss(attackedGeneral);
             } else if (armyPower1 < armyPower2) {
+
+                MoneyTransfer moneyTransfer = new MoneyTransfer(0.1, general);
+                moneyTransfer.execute(attackedGeneral);
+
                 presidentialSecretary.update(general, attackedGeneral, "lost");
                 battleWin(attackedGeneral);
                 battleLoss(general);
@@ -46,7 +54,7 @@ class AttackHandler extends Move {
 
         for (Soldier soldier : general.army) {
             soldier.experienceLoss();
-            if (soldier.getExperience() == 0) {
+            if (soldier.getExperience().equals(0)) {
                 general.army.remove(soldier);
                 presidentialSecretary.update(general, soldier, "died.");}
             else {
